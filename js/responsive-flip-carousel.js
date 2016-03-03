@@ -1,5 +1,23 @@
 $(function () {
 
+  $('a.prev, a.next').hide();
+
+  $(window).on('load', function(){
+    var activeHeight = $('.slide.active').height();
+    $('.portfolio').height(activeHeight);
+
+    $('.portfolio').hover(function () {
+      $(this).find('a.prev, a.next').show();
+    }, function () {
+      $(this).find('a.prev, a.next').hide();
+    });
+  });
+
+  $(window).resize(function () {
+    var activeHeight = $('.portfolio.active .slide.active').height();
+    $('.portfolio').height(activeHeight);
+  });
+
   $('nav a').click(function (event) {
     event.preventDefault();
     var target = $(this).attr('href');
@@ -18,8 +36,6 @@ $(function () {
    };
    portfolios.push(portfolio);
   });
-
-  console.log(portfolios);
 
   $('.portfolio a.next').click(function (event) {
     event.preventDefault();
@@ -45,11 +61,6 @@ $(function () {
     }
     $('#'+portfolio.id).find('.slide').removeClass('active');
     $('#'+portfolio.id).find('.slide').eq(portfolio.activeSlide).addClass('active');
-  });
-
-  $(window).resize(function () {
-    var setHeight = $('.slide').height();
-    $('.portfolio').height(setHeight);
   });
 
 });
