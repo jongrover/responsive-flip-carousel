@@ -19,6 +19,8 @@ $(function () {
    portfolios.push(portfolio);
   });
 
+  console.log(portfolios);
+
   $('.portfolio a.next').click(function (event) {
     event.preventDefault();
     var eq = $(this).parent().data('eq');
@@ -43,6 +45,11 @@ $(function () {
     }
     $('#'+portfolio.id).find('.slide').removeClass('active');
     $('#'+portfolio.id).find('.slide').eq(portfolio.activeSlide).addClass('active');
+  });
+
+  $(window).resize(function () {
+    var setHeight = $('.slide').height();
+    $('.portfolio').height(setHeight);
   });
 
 });
